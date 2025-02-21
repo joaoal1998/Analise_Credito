@@ -1,0 +1,33 @@
+idade_pessoa: Idade do indivíduo que solicita o empréstimo.
+renda_pessoa: Renda anual do indivíduo.
+tipo_residencia: Tipo de propriedade da casa do indivíduo.
+	ALUGUEL: O indivíduo está alugando um imóvel no momento.
+	HIPOTECA: O indivíduo tem uma hipoteca sobre a propriedade que possui.
+	PROPRIO: O indivíduo é dono de sua casa.
+	OUTRO: Outras categorias de propriedade de casa que podem ser específicas do conjunto de dados.
+tempo_emprego: Tempo de emprego do indivíduo em anos.
+finalidade_emprestimo: A intenção por trás do pedido de empréstimo.
+    PESSOAL
+    EDUCACAO
+    MÉDICO
+    RISCO
+    MELHORIA DA CASA
+    CONSOLIDACAO DE DIVIDAS
+classificacao_emprestimo: A nota atribuída ao empréstimo com base na qualidade de crédito do mutuário.
+	A: O mutuário tem uma alta qualidade de crédito, indicando baixo risco.
+	B: O mutuário é de risco relativamente baixo, mas não tão digno de crédito quanto o Grau A.
+	C: A credibilidade do mutuário é moderada.
+	D: O mutuário é considerado de maior risco em comparação com os graus anteriores.
+	E: A qualidade de crédito do mutuário é menor, indicando um risco maior.
+	F: O mutuário representa um risco de crédito significativo.
+	G: A credibilidade do mutuário é a mais baixa, significando o maior risco.
+valor_emprestimo: O valor do empréstimo solicitado pelo indivíduo.
+taxa_juros_emprestimo: A taxa de juros associada ao empréstimo.
+status_emprestimo: Status do empréstimo, onde 0 indica não inadimplência e 1 indica inadimplência.
+	0: Não inadimplência - O mutuário pagou com êxito o empréstimo conforme acordado e não houve inadimplência.
+	1: Inadimplência - O mutuário não pagou o empréstimo de acordo com os termos acordados e deixou de pagar o empréstimo.
+percentual_renda_comprometida: A porcentagem da renda representada pelo valor do empréstimo.
+historico_inadimplencia: Inadimplência histórica do indivíduo de acordo com os registros da agência de crédito.
+	S: O indivíduo tem um histórico de inadimplência em seu arquivo de crédito.
+	N: O indivíduo não tem nenhum histórico de inadimplência.
+tempo_historico_credito: A duração do histórico de crédito do indivíduo.
