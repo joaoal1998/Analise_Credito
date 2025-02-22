@@ -34,8 +34,7 @@ def cadastrar_cliente():
         print("\nErro: CPF já cadastrado.\n")
         return
 
-    cliente = {campo: input(f"{campo.replace('_', ' ')}: ").upper()
-               for campo in CAMPOS[1:]}
+    cliente = {campo: input(f"{campo.replace('_', ' ')}: ").upper() for campo in CAMPOS[1:]}
 
     cliente["cpf"] = cpf_cliente
 
@@ -84,8 +83,7 @@ def alterar_cliente():
     print("\nDigite os novos dados (deixe em branco para manter o valor atual):\n")
 
     for campo in CAMPOS[1:]:
-        valor = input(f"{campo.replace('_', ' ')} ({
-                      df.loc[indice, campo].values[0]}): ").upper()
+        valor = input(f"{campo.replace('_', ' ')} ({df.loc[indice, campo].values[0]}): ").upper()
         if valor:
             df.loc[indice, campo] = valor
 
@@ -100,8 +98,8 @@ def pesquisar_cliente():
         print("\nNenhum cliente cadastrado.\n")
         return
 
-    chave = input("Informe o CPF (somente números): ").strip()
-    resultado = df[df['cpf'] == chave]
+    cpf_cliente = input("Informe o CPF (somente números): ").strip()
+    resultado = df[df['cpf'] == cpf_cliente]
 
     if resultado.empty:
         print("\nCliente não encontrado.\n")

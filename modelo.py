@@ -7,20 +7,20 @@ from sklearn.tree import DecisionTreeClassifier
 def one_hot_encode(data, label):
 
     data_unique = pd.read_csv('clientes_treinamento.csv', sep=';')
-    unique_values = list(set(data_unique[f'{label}']))
+    valores_unicos = list(set(data_unique[f'{label}']))
 
-    value_to_index = {value: i for i, value in enumerate(unique_values)}
+    valores_indices = {value: i for i, value in enumerate(valores_unicos)}
 
-    one_hot_matrix = []
+    one_hot_matriz = []
     for item in data:
-        one_hot_vector = [0] * len(unique_values)
+        one_hot_vetor = [0] * len(valores_unicos)
 
-        index = value_to_index[item]
-        one_hot_vector[index] = 1
+        index = valores_indices[item]
+        one_hot_vetor[index] = 1
 
-        one_hot_matrix.append(one_hot_vector)
+        one_hot_matriz.append(one_hot_vetor)
 
-    return one_hot_matrix, unique_values
+    return one_hot_matriz, valores_unicos
 
 
 def tratar_dados(data):
@@ -32,8 +32,8 @@ def tratar_dados(data):
     data = data.drop(data[data['tempo_emprego'] > 60].index, axis=0)
 
     data['grupo_idade'] = pd.cut(data['idade_pessoa'],
-                                 bins=[20, 26, 36, 46, 56, 66],
-                                 labels=['20-25', '26-35', '36-45', '46-55', '56-65'])
+                                 bins=[20, 26, 36, 46, 56, 66, float('inf')],
+                                 labels=['20-25', '26-35', '36-45', '46-55', '56-65', '66<'])
     data['grupo_renda'] = pd.cut(data['renda_pessoa'],
                                  bins=[0, 25000, 50000, 75000,
                                        100000, float('inf')],
@@ -58,8 +58,7 @@ def tratar_dados(data):
                   'classificacao_emprestimo', 'historico_inadimplencia']
 
     for _ in range(len(categorias)):
-        one_hot_result, categories = one_hot_encode(
-            data[f'{categorias[_]}'], categorias[_])
+        one_hot_result, categories = one_hot_encode(data[f'{categorias[_]}'], categorias[_])
         criar_colunas(categories, one_hot_result)
 
     colunas_para_excluir = ['idade_pessoa', 'renda_pessoa', 'grupo_idade',
@@ -81,11 +80,9 @@ def treinar_modelo():
     X = data.drop(columns=['status_emprestimo'])
     y = data['status_emprestimo']
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    modelo = DecisionTreeClassifier(
-        random_state=42, max_depth=5, min_samples_split=10)
+    modelo = DecisionTreeClassifier(random_state=42, max_depth=5, min_samples_split=10)
     modelo.fit(X_train, y_train)
 
     return modelo
